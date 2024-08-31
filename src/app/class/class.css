@@ -1,0 +1,314 @@
+.time-date-details{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.time-date-details div{
+  flex: 1;
+}
+
+.time-sec {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+/* .time-clock{
+  margin-bottom: -40px;
+  z-index: 3;
+}
+
+.date-clock{
+  margin-top: -40px;
+  z-index: 3;
+} */
+
+.student-link{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.student-link:hover{
+  color: rgb(0, 255, 157);
+  text-decoration: underline;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttons button{
+  text-decoration: none;
+  color: black;
+  background-color: aliceblue;
+  padding: 5px 10px;
+  box-shadow: 0 0 5px black;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 10px;
+  margin: 10px;
+  white-space: nowrap;
+  background-color: red;
+  color: white;
+}
+
+.buttons button:nth-child(odd){
+  background-color: yellow;
+  color: black;
+}
+
+.class-page {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.table-container {
+  overflow: auto;
+  max-height: 71vh;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+  background-color: var(--color1);
+  border-radius: 10px;
+}
+
+.table-container tr:nth-child(odd) {
+  background-color: var(--color3);
+}
+
+table {
+  /* border-collapse: collapse; */
+  width: 100%;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  /* border: 1px solid #6b6b6b; */
+  width: max-content;
+  box-shadow: inset 0 0 5px rgba(250, 249, 249, 0.4);
+}
+
+.fixed-roll {
+  position: sticky;
+  left: 0px;
+  background-color: var(--color1);
+  z-index: 4;
+}
+
+.fixed-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: var(--color1);
+  z-index: 3;
+}
+
+thead th:first-child {
+  left: 0px;
+  z-index: 5; /* Ensures the top-left corner cell stays on top */
+}
+
+.attend-td {
+  position: relative;
+  text-align: center;
+  color: black;
+}
+
+.attend-td button{
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.attend-td button:hover{
+  opacity: 1;
+}
+
+.add-cell{
+  white-space: nowrap;
+}
+
+.add-cell span{
+  padding: 0 3px;
+  margin-left: 5px;
+  background-color: var(--color3);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.cross {
+  position: absolute;
+  top: 5px;
+  right: 0px;
+  background-color: red;
+  color: white;
+  font-size: 12px;
+  padding: 3px;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px black;
+}
+
+.cross-date{
+  top: 0;
+  right: -5px;
+}
+
+.time {
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 12px;
+  font-weight: normal;
+  opacity: 0.7;
+  color: black;
+  white-space: nowrap;
+}
+.menu {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: rgb(238, 238, 238);
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  padding: 3px;
+  border-radius: 100%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px black;
+}
+.menus {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: var(--color2);
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  padding: 3px;
+  width: 100px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px black;
+  border-radius: 5px;
+  gap: 5px;
+  z-index: 2;
+}
+
+.menus button{
+  width: 100%;
+  text-align: center;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 1px auto;
+  background-color: var(--color1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 1);
+  color: white;
+}
+
+.p-a-button{
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.6);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.add-student-btn {
+  width: 100%;
+  color: white;
+  font-size: 18px;
+  margin: 0;
+  border-radius: 0;
+  height: 100%;
+}
+
+
+.add-student td{
+  padding: 0;
+  background-color: var(--color1);
+}
+
+
+td input{
+  height: 100%;
+  width: 100%;
+  padding: 12px 10px;
+  font-size: 14px;
+  border: none;
+  text-align: center;
+  background-color: var(--color1);
+  color: white;
+  outline: none;
+}
+
+td input:focus{
+  background-color: var(--color2);
+}
+
+.add-student td button{
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  margin: 0;
+  transition: all 0.2s;
+  font-size: 18px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+
+.add-student td button:hover{
+  box-shadow: 0 0 5px rgb(255, 255, 255);
+  opacity: 1;
+}
+
+.flatpickr-input{
+  width: 80px;
+  padding: 3px;
+}

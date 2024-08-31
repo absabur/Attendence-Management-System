@@ -1,0 +1,50 @@
+.add-student-page{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.add-student-form{
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: var(--color1);
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+
+.add-student-form div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+}
+
+.add-student-form div label{
+    width: 40%;
+}
+
+.add-student-form input, 
+.add-student-form select{
+    width: 60%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+
+
+
+.add-student-form a{
+    color: #960000;
+    text-decoration: none;
+}

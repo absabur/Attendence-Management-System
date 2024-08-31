@@ -1,0 +1,94 @@
+.details {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  align-self: center;
+  gap: 20px;
+}
+
+.details div {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 20px 0;
+}
+.details div table {
+  width: 100%;
+}
+
+.edit-delete-btn {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.edit-delete-btn button {
+  background-color: red;
+  color: white;
+}
+
+.edit-delete-btn button:nth-child(odd) {
+  background-color: yellow;
+  color: black;
+}
+
+.details p {
+  margin-bottom: 10px;
+}
+
+.details button {
+  text-decoration: none;
+  padding: 5px 10px;
+  box-shadow: 0 0 5px black;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 10px;
+}
+
+.charts {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.percentage {
+  width: 280px;
+  height: 280px;
+  background-color: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px black;
+}
+
+.outside {
+  width: 70%;
+  height: 70%;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.inside {
+  width: 70%;
+  height: 70%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

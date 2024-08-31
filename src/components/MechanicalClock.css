@@ -1,0 +1,143 @@
+.clock-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #3c3c3c, #2c2c2c);
+  padding: 10px;
+  border-radius: 10px;
+  width: 270px;
+  height: 350px;
+}
+
+
+.clock {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, #4e4e4e, #1e1e1e);
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 0, 0, 0.5);
+  border: 8px solid #333;
+  padding: 10px;
+}
+
+.clock-face {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hand {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform-origin: bottom;
+  transform: translateX(-50%) rotate(90deg);
+  background: #333;
+  border-radius: 2px;
+}
+
+.hour-hand {
+  width: 6px;
+  height: 25%;
+  background: #ffd700;
+  filter: drop-shadow(5px 5px 5px black);
+}
+
+.minute-hand {
+  width: 4px;
+  height: 35%;
+  background: #ffff66;
+  filter: drop-shadow(5px 5px 5px black);
+}
+
+.second-hand {
+  width: 2px;
+  height: 45%;
+  background: #ff4d4d;
+  filter: drop-shadow(5px 5px 5px black);
+}
+
+.center-point {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: #ff4d4d;
+  border-radius: 50%;
+  border: 2px solid #333;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.number {
+  position: absolute;
+  font-size: 18px;
+  color: #ffd700;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+}
+
+.number-1 {
+  top: 14%;
+  left: 74%;
+}
+
+.number-2 {
+  top: 30%;
+  left: 90%;
+}
+
+.number-3 {
+  top: 50%;
+  left: 96%;
+}
+
+.number-4 {
+  top: 70%;
+  left: 90%;
+}
+
+.number-5 {
+  top: 88%;
+  left: 72%;
+}
+
+.number-6 {
+  top: 95%;
+  left: 50%;
+}
+
+.number-7 {
+  top: 88%;
+  left: 27%;
+}
+
+.number-8 {
+  top: 70%;
+  left: 9%;
+}
+
+.number-9 {
+  top: 50%;
+  left: 4%;
+}
+
+.number-10 {
+  top: 30%;
+  left: 9%;
+}
+
+.number-11 {
+  top: 14%;
+  left: 27%;
+}
+
+.number-12 {
+  top: 6%;
+  left: 50%;
+}
