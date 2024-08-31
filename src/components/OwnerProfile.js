@@ -8,8 +8,8 @@ const OwnerProfile = ({ params }) => {
     let tokenString = localStorage.getItem("attendencetoken");
     let token;
     token = tokenString ? JSON.parse(tokenString) : null;
-    if (token?.id != params.teacher) {
-      router.push(`/${token.id}`, { scroll: false });
+    if (!token || token?.id != params.teacher) {
+      router.push(`/login`, { scroll: false });
     }
   }, []);
 

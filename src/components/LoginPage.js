@@ -104,7 +104,7 @@ const LoginPage = () => {
           <button className="btn" type="submit">Login</button>
         </div>
         <div>
-          Don't have an account? <Link href="/register">register</Link>
+          Don&apos;t have an account? <Link href="/register">register</Link>
         </div>
       </form>
       {redirect != 0 && (

@@ -13,8 +13,8 @@ export default async function RootLayout({ children, params }) {
   }
   return (
     <>
-      <OwnerProfile params={params} />
       <AuthCheck />
+      <OwnerProfile params={params} />
       {children}
     </>
   );

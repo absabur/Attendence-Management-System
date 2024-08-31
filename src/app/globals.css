@@ -78,6 +78,8 @@ form {
   transition: all 0.2s;
   border: none !important;
   margin: 10px 0;
+  font-weight: 600;
+  font-size: 16px;
 
   user-select: none; /* For modern browsers */
   -webkit-user-select: none; /* For Safari */

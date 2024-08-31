@@ -132,7 +132,7 @@ const AddStudent = ({ params }) => {
         onSubmit={handleSubmit}
       >
         <div>
-          <label>Student's Name:</label>
+          <label>Student&apos; Name:</label>
           <input
             type="text"
             id="fullname"

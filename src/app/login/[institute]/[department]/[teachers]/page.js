@@ -119,7 +119,7 @@ const PasswordPage = ({ params }) => {
             placeholder="Enter your password"
           />
         </div>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: "flex", width: "100%", justifyContent: "center" }}>
           <button className="btn" type="submit">Login</button>
         </div>
       </form>

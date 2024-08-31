@@ -1,10 +1,11 @@
 "use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Links = () => {
   const [teacherDetails, setTeacherDetails] = useState(null);
-
+  const pathname = usePathname();
   useEffect(() => {
     const fetchTeacherDetails = async () => {
       const token = JSON.parse(localStorage.getItem("attendencetoken"));
@@ -18,7 +19,10 @@ const Links = () => {
           setTeacherDetails(result);
         } catch (error) {
           console.error("Error fetching teacher details:", error);
+          setTeacherDetails(null);
         }
+      } else {
+        setTeacherDetails(null);
       }
       const attendResponse = await fetch(
         `http://localhost:4000/attendence?studentId=${null}`
@@ -42,7 +46,8 @@ const Links = () => {
     };
 
     fetchTeacherDetails();
-  }, []);
+  }, [pathname]);
+
   return (
     <>
       {teacherDetails ? (

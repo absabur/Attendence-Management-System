@@ -1,4 +1,5 @@
-"use client";
+'use client'
+import Loading from "@/components/Loading";
 import { allDepartments } from "@/data/data";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -46,17 +47,7 @@ const Departments = ({ params }) => {
           />
         </div>
         {departments.length === 0 && (
-          <div
-            style={{
-              width: "100%",
-              fontSize: "50px",
-              textAlign: "center",
-              margin: "40px 0",
-              fontWeight: "600",
-            }}
-          >
-            Loading...
-          </div>
+          <Loading />
         )}
         {departments.map((dept) => (
           <Link
@@ -73,3 +64,4 @@ const Departments = ({ params }) => {
 };
 
 export default Departments;
+
