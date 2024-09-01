@@ -25,7 +25,7 @@ const UpgradeTeacher = () => {
         const teacherId = token.id;
         try {
           const response = await fetch(
-            `http://localhost:4000/teachers/${teacherId}`
+            `http://localhost:4000/teachers/${teacherId}`, { cache: "no-store"}
           );
           const result = await response.json();
           setFormData(result);
@@ -49,7 +49,7 @@ const UpgradeTeacher = () => {
     e.preventDefault();
 
     let exists = await fetch(
-      `http://localhost:4000/teachers?username=${formData.username}`
+      `http://localhost:4000/teachers?username=${formData.username}`, { cache: "no-store"}
     );
     exists = await exists.json();
     if (exists[0] && exists[0].id != formData.id) {
@@ -74,6 +74,7 @@ const UpgradeTeacher = () => {
           ...formData,
           updatedAt: new Date(),
         }),
+        cache: "no-store"
       }
     );
 
@@ -89,7 +90,7 @@ const UpgradeTeacher = () => {
     //   localStorage.removeItem("toast");
     // }, 3000);
     setFormData(result);
-    router.push("/classes", { scroll: false });
+    router.push(`/${formData.id}/classes`, { scroll: false });
   };
 
   const handleLogout = () => {

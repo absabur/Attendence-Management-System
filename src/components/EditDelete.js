@@ -13,29 +13,32 @@ const EditDelete = ({params}) => {
           `http://localhost:4000/classes/${classId}`,
           {
             method: "DELETE",
+            cache: "no-store"
           }
         );
         await response.json();
 
         const stuResponse = await fetch(
-          `http://localhost:4000/students?classId=${classId}`
+          `http://localhost:4000/students?classId=${classId}`, { cache: "no-store"}
         );
 
         const stuResult = await stuResponse.json();
         stuResult.forEach((attend) => {
           fetch(`http://localhost:4000/students/${attend.id}`, {
             method: "DELETE",
+            cache: "no-store",
           });
         });
 
         const dateResponse = await fetch(
-          `http://localhost:4000/dates?classId=${classId}`
+          `http://localhost:4000/dates?classId=${classId}`, { cache: "no-store"}
         );
 
         const dateResult = await dateResponse.json();
         dateResult.forEach((attend) => {
           fetch(`http://localhost:4000/students/${attend.id}`, {
             method: "DELETE",
+            cache: "no-store",
           });
         });
         localStorage.setItem(
@@ -45,7 +48,8 @@ const EditDelete = ({params}) => {
             message: `Class has been deleted successfully`,
           })
         );
-        router.push("/classes", { scroll: false });
+        let id = JSON.parse(localStorage.getItem("attendencetoken")).id
+        router.push(`/${id}/classes`, { scroll: false });
         return;
       }
       return;

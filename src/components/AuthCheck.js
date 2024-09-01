@@ -19,7 +19,7 @@ const AuthCheck = () => {
       const tokenCheck = async () => {
         try {
           const response = await fetch(
-            `http://localhost:4000/teachers/${token.id}`
+            `http://localhost:4000/teachers/${token.id}`, { cache: "no-store"}
           );
           const result = await response.json();
           if (

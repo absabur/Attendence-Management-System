@@ -8,10 +8,23 @@
       "username": "absabur",
       "department": "computer-science-and-technology",
       "institute": "bogura-polytechnic-institute",
-      "password": "3@2PGtSF4r$*^gP",
-      "cpassword": "3@2PGtSF4r$*^gP",
+      "password": "1111",
+      "cpassword": "1111",
       "createdAt": "2024-08-29T09:25:37.875Z",
-      "updatedAt": "2024-08-29T09:38:01.880Z"
+      "updatedAt": "2024-09-01T05:05:21.698Z"
+    },
+    {
+      "id": "4199",
+      "fullname": "test",
+      "email": "sam@filmai.tech",
+      "phone": "",
+      "username": "test",
+      "department": "civil-engineering",
+      "institute": "dhaka-polytechnic-institute",
+      "password": "1111",
+      "cpassword": "1111",
+      "createdAt": "2024-09-01T05:47:24.923Z",
+      "updatedAt": "2024-09-01T05:51:24.824Z"
     }
   ],
   "classes": [
@@ -19,13 +32,13 @@
       "id": "b8da",
       "department": "architecture-and-interior-design-technology",
       "semester": "3rd",
-      "shift": "First",
-      "subject": "Programming",
+      "shift": "Second",
+      "subject": "python",
       "cell": 14,
       "institute": "bogura-polytechnic-institute",
-      "group": "",
+      "group": "B",
       "createdAt": "2024-08-29T09:27:06.933Z",
-      "updatedAt": "2024-08-31T13:34:05.212Z",
+      "updatedAt": "2024-09-01T05:25:59.501Z",
       "teacher": "0e85"
     }
   ],
@@ -33,11 +46,11 @@
     {
       "id": "c8bb",
       "fullname": "Md Abdus Sabur",
-      "roll": "12",
+      "roll": "10",
       "email": "",
       "phone": "",
       "createdAt": "2024-08-29T09:37:03.426Z",
-      "updatedAt": "2024-08-30T16:30:51.026Z",
+      "updatedAt": "2024-09-01T05:22:57.627Z",
       "classId": "b8da"
     },
     {
@@ -104,19 +117,21 @@
   "dates": [
     {
       "id": "0b4d",
-      "date": "2024-08-24T18:00:00.000Z",
+      "date": "2024-08-25T00:00:00.000Z",
       "classId": "b8da",
       "classNumber": 1,
       "createdAt": "2024-08-30T16:35:01.024Z",
-      "updatedAt": "2024-08-31T13:31:02.581Z"
+      "updatedAt": "2024-09-01T16:07:26.964Z",
+      "period": "1"
     },
     {
       "id": "1c18",
-      "date": "2024-08-25T18:00:00.000Z",
+      "date": "2024-08-27T00:00:00.000Z",
       "classId": "b8da",
       "classNumber": 2,
       "createdAt": "2024-08-30T16:35:17.640Z",
-      "updatedAt": "2024-08-31T13:30:56.965Z"
+      "updatedAt": "2024-09-01T16:07:23.348Z",
+      "period": "2"
     }
   ],
   "attendence": [
@@ -211,16 +226,6 @@
       "time": "On Time"
     },
     {
-      "id": "d18a",
-      "status": "A",
-      "classId": "b8da",
-      "studentId": "c61c",
-      "classNumber": 1,
-      "createdAt": "2024-08-31T14:22:06.501Z",
-      "updatedAt": "2024-08-31T14:22:06.501Z",
-      "time": "On Time"
-    },
-    {
       "id": "1799",
       "status": "A",
       "classId": "b8da",
@@ -258,6 +263,16 @@
       "classNumber": 2,
       "createdAt": "2024-08-31T14:22:12.948Z",
       "updatedAt": "2024-08-31T14:22:12.948Z",
+      "time": "On Time"
+    },
+    {
+      "id": "3b2c",
+      "status": "A",
+      "classId": "b8da",
+      "studentId": "c61c",
+      "classNumber": 1,
+      "createdAt": "2024-09-01T13:55:54.613Z",
+      "updatedAt": "2024-09-01T13:55:54.613Z",
       "time": "On Time"
     }
   ]

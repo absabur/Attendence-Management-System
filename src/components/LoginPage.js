@@ -5,7 +5,6 @@ import "./register.css";
 import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
-  const [redirect, setRedirect] = useState(0);
   const [formData, setFormData] = useState({
     fullname: "",
     email: "",
@@ -30,7 +29,7 @@ const LoginPage = () => {
     e.preventDefault();
 
     let exists = await fetch(
-      `http://localhost:4000/teachers?username=${formData.username}&password=${formData.password}&cpassword=${formData.password}`
+      `http://localhost:4000/teachers?username=${formData.username}&password=${formData.password}&cpassword=${formData.password}`, { cache: "no-store"}
     );
     exists = await exists.json();
     if (!exists[0]) {
@@ -56,11 +55,6 @@ const LoginPage = () => {
         department: exists[0].department,
       })
     );
-    let sec = 3;
-    setInterval(() => {
-      setRedirect(sec);
-      sec--;
-    }, 1000);
     localStorage.setItem(
       "toast",
       JSON.stringify({ type: "success", message: `Loged in successfull!` })
@@ -69,7 +63,7 @@ const LoginPage = () => {
     //   localStorage.removeItem("toast");
     // }, 3000);
 
-    router.push("/classes", { scroll: false });
+    router.push(`/${exists[0].id}/classes`, { scroll: false });
   };
 
   return (
@@ -107,9 +101,6 @@ const LoginPage = () => {
           Don&apos;t have an account? <Link href="/register">register</Link>
         </div>
       </form>
-      {redirect != 0 && (
-        <div className="redirecting">Redirecting in {redirect} second</div>
-      )}
     </div>
   );
 };

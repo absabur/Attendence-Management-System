@@ -6,8 +6,11 @@
 
 :root {
   --color1: #291d6d;
-  --color2: #0e092b;
+  --color2: #06002b;
   --color3: #704cff;
+  --color1: #6d1d69;
+  --color2: #2b0029;
+  --color3: #ff4cff;
 }
 
 body {

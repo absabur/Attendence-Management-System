@@ -98,6 +98,22 @@ table {
   width: 100%;
 }
 
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.sort-button {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.sort-button svg{
+  cursor: pointer;
+}
+
 th,
 td {
   padding: 10px;
@@ -160,10 +176,28 @@ thead th:first-child {
   cursor: pointer;
 }
 
+.week-day{
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.dot{
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none;
+  color: var(--color1);
+}
+
+input[placeholder="Pick a date"]::placeholder{
+  color: white;
+}
+
 .cross {
   position: absolute;
   top: 5px;
-  right: 0px;
+  right: 5px;
+  margin: 0;
   background-color: red;
   color: white;
   font-size: 12px;
@@ -180,8 +214,31 @@ thead th:first-child {
 }
 
 .cross-date{
-  top: 0;
-  right: -5px;
+  top: 2px;
+  right: 2px;
+  margin: 0;
+  width: 17px;
+  height: 17px;
+}
+
+.cross-period{
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  margin: 0;
+  background-color: rgb(238, 238, 238);
+  color: rgb(0, 0, 0);
+  font-size: 12px;
+  padding: 3px;
+  border-radius: 100%;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 5px black;
 }
 
 .time {
@@ -216,13 +273,13 @@ thead th:first-child {
 }
 .menus {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 25px;
+  left: 5px;
   background-color: var(--color2);
   color: rgb(0, 0, 0);
   font-size: 12px;
   padding: 3px;
-  width: 100px;
+  width: 90px;
   cursor: pointer;
   border: none;
   display: flex;

@@ -7,7 +7,7 @@ export const metadata = {
   description: "This is a attendence app for polytechnic institutes.",
 };
 export default async function RootLayout({ children, params }) {
-  let res = await fetch(`http://localhost:4000/classes/${params.class}`)
+  let res = await fetch(`http://localhost:4000/classes/${params.class}`, { cache: "no-store"})
   if (res.status == 404) {
     notFound()
   }

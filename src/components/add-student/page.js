@@ -21,7 +21,7 @@ const AddStudent = ({ params }) => {
     const loadClassDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/classes/${params.class}`
+          `http://localhost:4000/classes/${params.class}`, { cache: "no-store"}
         );
         const result = await response.json();
 
@@ -65,7 +65,7 @@ const AddStudent = ({ params }) => {
     };
 
     let exists = await fetch(
-      `http://localhost:4000/students?roll=${formData.roll}&classId=${classId}`
+      `http://localhost:4000/students?roll=${formData.roll}&classId=${classId}`, { cache: "no-store"}
     );
     exists = await exists.json();
     if (exists[0]) {
@@ -90,6 +90,7 @@ const AddStudent = ({ params }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(studentData),
+        cache: "no-store"
       });
 
       const result = await response.json();

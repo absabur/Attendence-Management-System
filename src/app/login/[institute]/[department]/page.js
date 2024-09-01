@@ -1,42 +1,28 @@
-'use client'
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import { allDepartments, allInstitutes } from "@/data/data";
+import Link from "next/link";
 
+const Teachers = async ({ params }) => {
+  const institute = params.institute;
+  const department = params.department;
+  const response = await fetch(
+    `http://localhost:4000/teachers?department=${department}&institute=${institute}`,
+    { cache: "no-store" }
+  );
 
-const Teachers = ({params}) => {
-  const [teachers, setTeachers] = useState([]);
+  const result = await response.json();
 
-  useEffect(() => {
-
-    const loadTeachers = async () => {
-      try {
-        const institute = params.institute
-        const department = params.department
-        const response = await fetch(`http://localhost:4000/teachers?department=${department}&institute=${institute}`);
-
-        const result = await response.json();
-
-        setTeachers(result);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    loadTeachers();
-  }, []);
-
- 
+  let teachers = result;
 
   return (
-    <div className='page'>
+    <div className="page">
       <h1>Log In</h1>
-      <div id="teacherList" className='links'>
-      <h2>Choose your name</h2>
-        {teachers.map(teacher => (
+      <div id="teacherList" className="links">
+        <h2>Choose your name</h2>
+        {teachers.map((teacher) => (
           <Link
-          href={`/login/${params.institute}/${params.department}/${teacher.fullname}-${teacher.id}`}
+            href={`/login/${params.institute}/${params.department}/${teacher.id}`}
             key={teacher.id}
-            className='link'
+            className="link"
           >
             {teacher.fullname}
           </Link>
@@ -47,3 +33,24 @@ const Teachers = ({params}) => {
 };
 
 export default Teachers;
+
+// export async function generateStaticParams() {
+//   const params = [];
+
+//   allInstitutes.forEach((institute) => {
+//     allDepartments.forEach((department) => {
+//       params.push({
+//         institute: institute.id,
+//         department: department.id,
+//       });
+//     });
+//   });
+
+//   return params;
+// }
+// export const revalidate = 5;
+
+export async function generateStaticParams() {
+  return []; // Return an empty array to handle the route dynamically.
+}
+

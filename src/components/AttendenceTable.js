@@ -2,15 +2,22 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { FaTrashAlt } from "react-icons/fa";
+import { FaCaretDown, FaCaretUp, FaTrashAlt } from "react-icons/fa";
 import { BsThreeDots } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/material_blue.css";
+
+function convertToUTC(date) {
+  const utcDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return utcDate;
+}
+
 import Loading from "./Loading";
 
 const AttendenceTable = ({ params }) => {
+  const [sort, setSort] = useState("rollu");
   const [loading, setLoading] = useState(true);
   const [classDetails, setClassDetails] = useState({});
   const [dropDown, setDropDown] = useState();
@@ -26,26 +33,30 @@ const AttendenceTable = ({ params }) => {
     const loadClassDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/classes/${params.class}`
+          `http://localhost:4000/classes/${params.class}`,
+          { cache: "no-store" }
         );
         const result = await response.json();
         const responseStudent = await fetch(
-          `http://localhost:4000/students?classId=${params.class}`
+          `http://localhost:4000/students?classId=${params.class}`,
+          { cache: "no-store" }
         );
         const resultStudent = await responseStudent.json();
         const dateheadResponse = await fetch(
-          `http://localhost:4000/dates?classId=${params.class}`
+          `http://localhost:4000/dates?classId=${params.class}`,
+          { cache: "no-store" }
         );
         const dateheadResult = await dateheadResponse.json();
         const attendResponse = await fetch(
-          `http://localhost:4000/attendence?classId=${params.class}`
+          `http://localhost:4000/attendence?classId=${params.class}`,
+          { cache: "no-store" }
         );
         const attendResult = await attendResponse.json();
 
         setClassDetails({
           group: result.group,
           cell: result.cell,
-          students: resultStudent,
+          students: resultStudent.sort((a, b) => a.roll - b.roll),
           dates: dateheadResult,
           attendence: attendResult,
         });
@@ -55,9 +66,7 @@ const AttendenceTable = ({ params }) => {
         console.error("Error fetching data:", error);
       }
     };
-    setTimeout(() => {
-      loadClassDetails();
-    }, 1000);
+    loadClassDetails();
   }, [params.class]);
 
   useEffect(() => {
@@ -68,6 +77,49 @@ const AttendenceTable = ({ params }) => {
       phone: "",
     });
   }, [addStudent]);
+
+  useEffect(() => {
+    if (sort == "rollu") {
+      setClassDetails({
+        ...classDetails,
+        students: classDetails?.students?.sort((a, b) => a.roll - b.roll),
+      });
+    } else if (sort == "rolld") {
+      setClassDetails({
+        ...classDetails,
+        students: classDetails?.students?.sort((a, b) => b.roll - a.roll),
+      });
+    } else if (sort == "nameu") {
+      setClassDetails({
+        ...classDetails,
+        students: classDetails?.students?.sort((a, b) =>
+          a.fullname.localeCompare(b.fullname)
+        ),
+      });
+    } else if (sort == "named") {
+      setClassDetails({
+        ...classDetails,
+        students: classDetails?.students?.sort((a, b) =>
+          b.fullname.localeCompare(a.fullname)
+        ),
+      });
+    }
+  }, [sort]);
+
+  function getWeekdayName(dateString) {
+    const date = new Date(dateString);
+    const daysOfWeek = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    return daysOfWeek[date.getUTCDay()];
+  }
 
   const handleInputChange = (e) => {
     setFormData({
@@ -110,7 +162,8 @@ const AttendenceTable = ({ params }) => {
     };
 
     let exists = await fetch(
-      `http://localhost:4000/students?roll=${formData.roll}&classId=${classId}`
+      `http://localhost:4000/students?roll=${formData.roll}&classId=${classId}`,
+      { cache: "no-store" }
     );
     exists = await exists.json();
     if (exists[0]) {
@@ -135,6 +188,7 @@ const AttendenceTable = ({ params }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(studentData),
+        cache: "no-store",
       });
 
       const result = await response.json();
@@ -182,6 +236,7 @@ const AttendenceTable = ({ params }) => {
         date: date,
         classId: currentClass,
         classNumber: classNumber,
+        period: "1",
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -197,10 +252,12 @@ const AttendenceTable = ({ params }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      cache: "no-store",
     });
 
     const dateheadResponse = await fetch(
-      `http://localhost:4000/dates?classId=${classId}`
+      `http://localhost:4000/dates?classId=${classId}`,
+      { cache: "no-store" }
     );
     const dateheadResult = await dateheadResponse.json();
     setClassDetails({
@@ -214,8 +271,8 @@ const AttendenceTable = ({ params }) => {
           type: "success",
           message: `Date has been changed`,
         })
-      ); 
-    }else {
+      );
+    } else {
       localStorage.setItem(
         "toast",
         JSON.stringify({
@@ -227,8 +284,11 @@ const AttendenceTable = ({ params }) => {
   };
 
   const removeDate = async (id, classId, classNumber) => {
-    console.log(classId, classNumber)
-    let exists = await fetch(`http://localhost:4000/attendence?classId=${classId}&classNumber=${classNumber}`);
+    console.log(classId, classNumber);
+    let exists = await fetch(
+      `http://localhost:4000/attendence?classId=${classId}&classNumber=${classNumber}`,
+      { cache: "no-store" }
+    );
     exists = await exists.json();
 
     if (exists[0]) {
@@ -239,7 +299,7 @@ const AttendenceTable = ({ params }) => {
           message: `You can not remove the date`,
         })
       );
-      return
+      return;
     }
     let con = confirm("Are you sure you want to reset Date?");
     if (!con) {
@@ -247,10 +307,12 @@ const AttendenceTable = ({ params }) => {
     }
     await fetch(`http://localhost:4000/dates/${id}`, {
       method: "DELETE",
+      cache: "no-store",
     });
 
     const dateheadResponse = await fetch(
-      `http://localhost:4000/dates?classId=${classId}`
+      `http://localhost:4000/dates?classId=${classId}`,
+      { cache: "no-store" }
     );
     const dateheadResult = await dateheadResponse.json();
     setClassDetails({
@@ -279,7 +341,8 @@ const AttendenceTable = ({ params }) => {
     };
 
     let exists = await fetch(
-      `http://localhost:4000/dates?classId=${classId}&classNumber=${classNumber}`
+      `http://localhost:4000/dates?classId=${classId}&classNumber=${classNumber}`,
+      { cache: "no-store" }
     );
     exists = await exists.json();
     if (!exists[0]) {
@@ -299,10 +362,12 @@ const AttendenceTable = ({ params }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      cache: "no-store",
     });
 
     const attendResponse = await fetch(
-      `http://localhost:4000/attendence?classId=${classId}`
+      `http://localhost:4000/attendence?classId=${classId}`,
+      { cache: "no-store" }
     );
     const attendResult = await attendResponse.json();
     setClassDetails({
@@ -323,15 +388,43 @@ const AttendenceTable = ({ params }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
+      cache: "no-store",
     });
 
     const attendResponse = await fetch(
-      `http://localhost:4000/attendence?classId=${classId}`
+      `http://localhost:4000/attendence?classId=${classId}`,
+      { cache: "no-store" }
     );
     const attendResult = await attendResponse.json();
     setClassDetails({
       ...classDetails,
       attendence: attendResult,
+    });
+    setDropDown();
+  };
+  const handlePeriod = async (id, period, classId) => {
+    let formData = {
+      updatedAt: new Date(),
+      period: period,
+    };
+
+    await fetch(`http://localhost:4000/dates/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+      cache: "no-store",
+    });
+
+    const dateResponse = await fetch(
+      `http://localhost:4000/dates?classId=${classId}`,
+      { cache: "no-store" }
+    );
+    const dateResult = await dateResponse.json();
+    setClassDetails({
+      ...classDetails,
+      dates: dateResult,
     });
     setDropDown();
   };
@@ -343,12 +436,13 @@ const AttendenceTable = ({ params }) => {
     }
     await fetch(`http://localhost:4000/attendence/${id}`, {
       method: "DELETE",
+      cache: "no-store",
     });
 
     const attendResponse = await fetch(
       `http://localhost:4000/attendence?classId=${classId}`,
       {
-        method: "GET",
+        cache: "no-store",
       }
     );
     const attendResult = await attendResponse.json();
@@ -368,6 +462,7 @@ const AttendenceTable = ({ params }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(classData),
+      cache: "no-store",
     });
     localStorage.setItem(
       "toast",
@@ -393,8 +488,36 @@ const AttendenceTable = ({ params }) => {
           <table>
             <thead>
               <tr>
-                <th className="fixed-roll">Roll</th>
-                <th className="fixed-name">Student Name</th>
+                <th className="fixed-roll">
+                  <div className="sort">
+                    <div>Roll</div>
+                    <div className="sort-button">
+                      <FaCaretUp
+                        color={sort == "rollu" && "#33ff00"}
+                        onClick={() => setSort("rollu")}
+                      />
+                      <FaCaretDown
+                        color={sort == "rolld" && "#33ff00"}
+                        onClick={() => setSort("rolld")}
+                      />
+                    </div>
+                  </div>
+                </th>
+                <th className="fixed-name">
+                  <div className="sort">
+                    <div>Student Name</div>
+                    <div className="sort-button">
+                      <FaCaretUp
+                        color={sort == "nameu" && "#33ff00"}
+                        onClick={() => setSort("nameu")}
+                      />
+                      <FaCaretDown
+                        color={sort == "named" && "#33ff00"}
+                        onClick={() => setSort("named")}
+                      />
+                    </div>
+                  </div>
+                </th>
                 {Array.from({ length: classDetails?.cell }, (_, i) => {
                   const matchedDate = classDetails?.dates?.find(
                     (date) => date.classNumber === i + 1
@@ -405,18 +528,93 @@ const AttendenceTable = ({ params }) => {
                         <button
                           className="cross cross-date"
                           onClick={() =>
-                            removeDate(matchedDate?.id, params.class, i+1)
+                            removeDate(matchedDate?.id, params.class, i + 1)
                           }
                         >
                           <FaTrashAlt />
                         </button>
                       )}
+                      {matchedDate?.date && (
+                        <button
+                          className="cross-period"
+                          onClick={() =>
+                            setDropDown((dropDown) =>
+                              dropDown ? 0 : matchedDate?.id
+                            )
+                          }
+                        >
+                          {dropDown && dropDown == matchedDate?.id ? (
+                            <RxCross2 />
+                          ) : (
+                            <BsThreeDots />
+                          )}
+                        </button>
+                      )}
+
+                      {dropDown == matchedDate?.id && matchedDate?.date && (
+                        <div className="menus">
+                          <button
+                            style={{
+                              background:
+                                matchedDate?.period == "1" && "#33ff00",
+                              color: matchedDate?.period == "1" && "black",
+                              opacity: matchedDate?.period == "1" && "1",
+                            }}
+                            onClick={() =>
+                              handlePeriod(matchedDate?.id, "1", params.class)
+                            }
+                          >
+                            1 Period
+                          </button>
+                          <button
+                            style={{
+                              background:
+                                matchedDate?.period == "2" && "#33ff00",
+                              color: matchedDate?.period == "2" && "black",
+                              opacity: matchedDate?.period == "2" && "1",
+                            }}
+                            onClick={() =>
+                              handlePeriod(matchedDate?.id, "2", params.class)
+                            }
+                          >
+                            2 Period
+                          </button>
+                          <button
+                            style={{
+                              background:
+                                matchedDate?.period == "3" && "#33ff00",
+                              color: matchedDate?.period == "3" && "black",
+                              opacity: matchedDate?.period == "3" && "1",
+                            }}
+                            onClick={() =>
+                              handlePeriod(matchedDate?.id, "3", params.class)
+                            }
+                          >
+                            3 Period
+                          </button>
+                        </div>
+                      )}
+                      {matchedDate?.date && (
+                        <span className="week-day">
+                          {getWeekdayName(matchedDate?.date)}
+                        </span>
+                      )}
                       <Flatpickr
+                        style={{
+                          backgroundColor: "var(--color3)",
+                          color: "white",
+                          border: "none",
+                          outline: "none",
+                          textAlign: "center",
+                        }}
                         data-enable-time
                         value={matchedDate?.date || ""}
                         onChange={(selectedDates) => {
+                          const localDate = selectedDates[0];
+                          const utcDate = convertToUTC(localDate);
+
                           handleAddDate(
-                            selectedDates[0],
+                            utcDate,
                             i + 1,
                             params.class,
                             matchedDate?.id
@@ -424,8 +622,7 @@ const AttendenceTable = ({ params }) => {
                         }}
                         options={{
                           dateFormat: "d-m-Y",
-                          enableTime: false, // Enables time selection
-                          // You can add more Flatpickr options here
+                          enableTime: false,
                         }}
                         placeholder="Pick a date"
                       />
@@ -446,190 +643,183 @@ const AttendenceTable = ({ params }) => {
               </tr>
             </thead>
             <tbody>
-              {classDetails?.students
-                ?.sort((a, b) => a.roll - b.roll)
-                ?.map((student) => (
-                  <tr key={student.id}>
-                    <td className="fixed-roll">
-                      <Link
-                        className="student-link"
-                        href={`/class/${params.class}/${student.id}`}
+              {classDetails?.students?.map((student) => (
+                <tr key={student.id}>
+                  <td className="fixed-roll">
+                    <Link
+                      className="student-link"
+                      href={`/class/${params.class}/${student.id}`}
+                    >
+                      {student.roll}
+                    </Link>
+                  </td>
+                  <td className="fixed-name">
+                    <Link
+                      className="student-link"
+                      href={`/class/${params.class}/${student.id}`}
+                    >
+                      {student.fullname}
+                    </Link>
+                  </td>
+                  {Array.from({ length: classDetails?.cell }, (_, i) => {
+                    const matchedAttend = classDetails?.attendence?.find(
+                      (attend) =>
+                        attend.studentId === student.id &&
+                        attend.classNumber === i + 1
+                    );
+                    return (
+                      <td
+                        className="attend-td"
+                        key={i}
+                        style={{
+                          background:
+                            matchedAttend?.status == "P"
+                              ? "#b1ffb1"
+                              : matchedAttend?.status == "A"
+                              ? "#ffb1b1"
+                              : null,
+                        }}
                       >
-                        {student.roll}
-                      </Link>
-                    </td>
-                    <td className="fixed-name">
-                      <Link
-                        className="student-link"
-                        href={`/class/${params.class}/${student.id}`}
-                      >
-                        {student.fullname}
-                      </Link>
-                    </td>
-                    {Array.from({ length: classDetails?.cell }, (_, i) => {
-                      const matchedAttend = classDetails?.attendence?.find(
-                        (attend) =>
-                          attend.studentId === student.id &&
-                          attend.classNumber === i + 1
-                      );
-                      return (
-                        <td
-                          className="attend-td"
-                          key={i}
-                          style={{
-                            background:
-                              matchedAttend?.status == "P"
-                                ? "#b1ffb1"
-                                : matchedAttend?.status == "A"
-                                ? "#ffb1b1"
-                                : null,
-                          }}
-                        >
-                          {matchedAttend ? (
-                            <>
-                              <span>{matchedAttend.status}</span>
-                              <span className="time">
-                                {matchedAttend.status == "P" &&
-                                  matchedAttend.time}
-                              </span>
+                        {matchedAttend ? (
+                          <>
+                            <span>{matchedAttend.status}</span>
+                            <span className="time">
+                              {matchedAttend.status == "P" &&
+                                matchedAttend.time}
+                            </span>
+                            <button
+                              className="cross"
+                              onClick={() =>
+                                removeAttendence(matchedAttend.id, params.class)
+                              }
+                            >
+                              <FaTrashAlt />
+                            </button>
+                            {matchedAttend.status == "P" && (
                               <button
-                                className="cross"
+                                className="menu"
                                 onClick={() =>
-                                  removeAttendence(
-                                    matchedAttend.id,
-                                    params.class
+                                  setDropDown((dropDown) =>
+                                    dropDown ? 0 : matchedAttend.id
                                   )
                                 }
                               >
-                                <FaTrashAlt />
+                                {dropDown && dropDown == matchedAttend.id ? (
+                                  <RxCross2 />
+                                ) : (
+                                  <BsThreeDots />
+                                )}
                               </button>
-                              {matchedAttend.status == "P" && (
+                            )}
+
+                            {dropDown == matchedAttend.id && (
+                              <div className="menus">
                                 <button
-                                  className="menu"
+                                  style={{
+                                    background:
+                                      matchedAttend.time == "On Time" &&
+                                      "#33ff00",
+                                    color:
+                                      matchedAttend.time == "On Time" &&
+                                      "black",
+                                    opacity:
+                                      matchedAttend.time == "On Time" && "1",
+                                  }}
                                   onClick={() =>
-                                    setDropDown((dropDown) =>
-                                      dropDown ? 0 : matchedAttend.id
+                                    handleTime(
+                                      matchedAttend.id,
+                                      "On Time",
+                                      params.class
                                     )
                                   }
                                 >
-                                  {dropDown && dropDown == matchedAttend.id ? (
-                                    <RxCross2 />
-                                  ) : (
-                                    <BsThreeDots />
-                                  )}
+                                  On Time
                                 </button>
-                              )}
-
-                              {dropDown == matchedAttend.id && (
-                                <div className="menus">
-                                  <button
-                                    style={{
-                                      background:
-                                        matchedAttend.time == "On Time" &&
-                                        "#33ff00",
-                                      color:
-                                        matchedAttend.time == "On Time" &&
-                                        "black",
-                                      opacity:
-                                        matchedAttend.time == "On Time" && "1",
-                                    }}
-                                    onClick={() =>
-                                      handleTime(
-                                        matchedAttend.id,
-                                        "On Time",
-                                        params.class
-                                      )
-                                    }
-                                  >
-                                    On Time
-                                  </button>
-                                  <button
-                                    style={{
-                                      background:
-                                        matchedAttend.time == "Late Entry" &&
-                                        "#33ff00",
-                                      color:
-                                        matchedAttend.time == "Late Entry" &&
-                                        "black",
-                                      opacity:
-                                        matchedAttend.time == "Late Entry" &&
-                                        "1",
-                                    }}
-                                    onClick={() =>
-                                      handleTime(
-                                        matchedAttend.id,
-                                        "Late Entry",
-                                        params.class
-                                      )
-                                    }
-                                  >
-                                    Late Entry
-                                  </button>
-                                  <button
-                                    style={{
-                                      background:
-                                        matchedAttend.time == "Early Exit" &&
-                                        "#33ff00",
-                                      color:
-                                        matchedAttend.time == "Early Exit" &&
-                                        "black",
-                                      opacity:
-                                        matchedAttend.time == "Early Exit" &&
-                                        "1",
-                                    }}
-                                    onClick={() =>
-                                      handleTime(
-                                        matchedAttend.id,
-                                        "Early Exit",
-                                        params.class
-                                      )
-                                    }
-                                  >
-                                    Early Exit
-                                  </button>
-                                </div>
-                              )}
-                            </>
-                          ) : (
-                            <>
-                              <button
-                                style={{ background: "#61ff61" }}
-                                onClick={() =>
-                                  handleAttendence(
-                                    "P",
-                                    student.id,
-                                    i + 1,
-                                    params.class
-                                  )
-                                }
-                                className="p-a-button"
-                              >
-                                P
-                              </button>
-                              <button
-                                style={{
-                                  background: "#ff4141",
-                                  color: "white",
-                                }}
-                                onClick={() =>
-                                  handleAttendence(
-                                    "A",
-                                    student.id,
-                                    i + 1,
-                                    params.class
-                                  )
-                                }
-                                className="p-a-button"
-                              >
-                                A
-                              </button>
-                            </>
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
+                                <button
+                                  style={{
+                                    background:
+                                      matchedAttend.time == "Late Entry" &&
+                                      "#33ff00",
+                                    color:
+                                      matchedAttend.time == "Late Entry" &&
+                                      "black",
+                                    opacity:
+                                      matchedAttend.time == "Late Entry" && "1",
+                                  }}
+                                  onClick={() =>
+                                    handleTime(
+                                      matchedAttend.id,
+                                      "Late Entry",
+                                      params.class
+                                    )
+                                  }
+                                >
+                                  Late Entry
+                                </button>
+                                <button
+                                  style={{
+                                    background:
+                                      matchedAttend.time == "Early Exit" &&
+                                      "#33ff00",
+                                    color:
+                                      matchedAttend.time == "Early Exit" &&
+                                      "black",
+                                    opacity:
+                                      matchedAttend.time == "Early Exit" && "1",
+                                  }}
+                                  onClick={() =>
+                                    handleTime(
+                                      matchedAttend.id,
+                                      "Early Exit",
+                                      params.class
+                                    )
+                                  }
+                                >
+                                  Early Exit
+                                </button>
+                              </div>
+                            )}
+                          </>
+                        ) : (
+                          <>
+                            <button
+                              style={{ background: "#61ff61" }}
+                              onClick={() =>
+                                handleAttendence(
+                                  "P",
+                                  student.id,
+                                  i + 1,
+                                  params.class
+                                )
+                              }
+                              className="p-a-button"
+                            >
+                              P
+                            </button>
+                            <button
+                              style={{
+                                background: "#ff4141",
+                                color: "white",
+                              }}
+                              onClick={() =>
+                                handleAttendence(
+                                  "A",
+                                  student.id,
+                                  i + 1,
+                                  params.class
+                                )
+                              }
+                              className="p-a-button"
+                            >
+                              A
+                            </button>
+                          </>
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              ))}
               {addStudent && (
                 <tr className="add-student">
                   <td>

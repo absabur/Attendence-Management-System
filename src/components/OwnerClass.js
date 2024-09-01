@@ -11,7 +11,7 @@ const OwnerClass = ({ params }) => {
     if (token) {
       const classCheck = async () => {
         const response = await fetch(
-          `http://localhost:4000/classes?id=${params.class}&teacher=${token.id}`
+          `http://localhost:4000/classes?id=${params.class}&teacher=${token.id}`, { cache: "no-store"}
         );
         const result = await response.json();
         if (result.length == 0) {
@@ -26,7 +26,7 @@ const OwnerClass = ({ params }) => {
           //   localStorage.removeItem("toast");
           // }, 3000);
 
-          router.push("/classes", { scroll: false });
+          router.push(`/${token.id}/classes`, { scroll: false });
         }
       };
       classCheck();

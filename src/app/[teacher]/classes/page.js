@@ -1,21 +1,25 @@
+import GetClasses from "@/components/GetClasses";
 import Link from "next/link";
 
-import "./register.css";
-import UpgradeTeacher from "@/components/UpgradeTeacher";
+const TeacherProfile = async ({params}) => {
+  
+  let teacherId = params.teacher;
 
-const TeacherForm = ({params}) => {
   return (
-    <div className="register-page">
-      <h1>Update Profile</h1>
-      <UpgradeTeacher />
-      <Link className="btn" href={`/${params.teacher}/classes`}>
-        Return to classes
-      </Link>
+    <div className="classes-page">
+      <h1>Your Classes</h1>
+      <GetClasses params={params} />
+      <div>
+        <Link className="btn" href={`/${teacherId}/classes/add-class`}>
+          Add a Class
+        </Link>
+      </div>
     </div>
   );
 };
 
-export default TeacherForm;
+export default TeacherProfile;
+
 
 // export async function generateStaticParams() {
 //   const teachers = await fetch("http://localhost:4000/teachers", { cache: "no-store"});

@@ -19,7 +19,7 @@ const UnAuthCheck = () => {
           const tokenCheck = async () => {
             try{
               const response = await fetch(
-                `http://localhost:4000/teachers/${token.id}`
+                `http://localhost:4000/teachers/${token.id}`, { cache: "no-store"}
               );
               const result = await response.json();
               if (
@@ -27,7 +27,7 @@ const UnAuthCheck = () => {
                 result.institute == token.institute &&
                 result.department == token.department
               ) {
-                router.push("/classes", { scroll: false });
+                router.push(`/${token.id}/classes`, { scroll: false });
               } else {
                 localStorage.removeItem("attendencetoken");
               }

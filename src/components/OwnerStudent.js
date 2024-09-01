@@ -11,7 +11,7 @@ const OwnerStudent = ({ params }) => {
     if (token) {
       const classCheck = async () => {
         const stuResponse = await fetch(
-          `http://localhost:4000/students?classId=${params.class}&id=${params.student}`
+          `http://localhost:4000/students?classId=${params.class}&id=${params.student}`, { cache: "no-store"}
         );
         const stuResult = await stuResponse.json();
         if (stuResult.length == 0) {

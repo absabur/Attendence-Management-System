@@ -43,7 +43,7 @@ const TeacherForm = () => {
     }
 
     let exists = await fetch(
-      `http://localhost:4000/teachers?username=${formData.username}`
+      `http://localhost:4000/teachers?username=${formData.username}`, { cache: "no-store"}
     );
     exists = await exists.json();
     if (exists[0]) {
@@ -68,6 +68,7 @@ const TeacherForm = () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       }),
+      cache: "no-store"
     });
 
     await response.json();
