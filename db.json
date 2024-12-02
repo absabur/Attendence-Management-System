@@ -36,9 +36,9 @@
       "subject": "python",
       "cell": 14,
       "institute": "bogura-polytechnic-institute",
-      "group": "B",
+      "group": "A",
       "createdAt": "2024-08-29T09:27:06.933Z",
-      "updatedAt": "2024-09-01T05:25:59.501Z",
+      "updatedAt": "2024-12-02T14:18:16.508Z",
       "teacher": "0e85"
     }
   ],
@@ -84,26 +84,6 @@
       "classId": "b8da"
     },
     {
-      "id": "c61c",
-      "fullname": "sgasdga",
-      "roll": "3453",
-      "email": "",
-      "phone": "",
-      "createdAt": "2024-08-31T14:03:34.254Z",
-      "updatedAt": "2024-08-31T14:03:34.254Z",
-      "classId": "b8da"
-    },
-    {
-      "id": "db0a",
-      "fullname": "gsdfgsd",
-      "roll": "25435",
-      "email": "",
-      "phone": "",
-      "createdAt": "2024-08-31T14:03:40.583Z",
-      "updatedAt": "2024-08-31T14:03:40.583Z",
-      "classId": "b8da"
-    },
-    {
       "id": "e6f6",
       "fullname": "dfsdgfsdg",
       "roll": "2345",
@@ -132,6 +112,15 @@
       "createdAt": "2024-08-30T16:35:17.640Z",
       "updatedAt": "2024-09-01T16:07:23.348Z",
       "period": "2"
+    },
+    {
+      "id": "0f2b",
+      "date": "2024-12-04T00:00:00.000Z",
+      "classId": "b8da",
+      "classNumber": 3,
+      "period": "2",
+      "createdAt": "2024-12-02T14:20:12.262Z",
+      "updatedAt": "2024-12-02T14:20:35.193Z"
     }
   ],
   "attendence": [
@@ -236,43 +225,23 @@
       "time": "On Time"
     },
     {
-      "id": "258a",
+      "id": "8714",
       "status": "P",
       "classId": "b8da",
-      "studentId": "c61c",
-      "classNumber": 2,
-      "createdAt": "2024-08-31T14:22:09.181Z",
-      "updatedAt": "2024-08-31T14:22:09.181Z",
-      "time": "On Time"
+      "studentId": "c8bb",
+      "classNumber": 3,
+      "createdAt": "2024-12-02T14:20:16.799Z",
+      "updatedAt": "2024-12-02T14:20:18.856Z",
+      "time": "Late Entry"
     },
     {
-      "id": "f7c4",
-      "status": "P",
-      "classId": "b8da",
-      "studentId": "db0a",
-      "classNumber": 1,
-      "createdAt": "2024-08-31T14:22:11.316Z",
-      "updatedAt": "2024-08-31T14:22:11.316Z",
-      "time": "On Time"
-    },
-    {
-      "id": "09b6",
-      "status": "P",
-      "classId": "b8da",
-      "studentId": "db0a",
-      "classNumber": 2,
-      "createdAt": "2024-08-31T14:22:12.948Z",
-      "updatedAt": "2024-08-31T14:22:12.948Z",
-      "time": "On Time"
-    },
-    {
-      "id": "3b2c",
+      "id": "5ea8",
       "status": "A",
       "classId": "b8da",
-      "studentId": "c61c",
-      "classNumber": 1,
-      "createdAt": "2024-09-01T13:55:54.613Z",
-      "updatedAt": "2024-09-01T13:55:54.613Z",
+      "studentId": "9339",
+      "classNumber": 3,
+      "createdAt": "2024-12-02T14:20:21.107Z",
+      "updatedAt": "2024-12-02T14:20:21.107Z",
       "time": "On Time"
     }
   ]

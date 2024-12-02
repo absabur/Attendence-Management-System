@@ -594,11 +594,14 @@ const AttendenceTable = ({ params }) => {
                           </button>
                         </div>
                       )}
-                      {matchedDate?.date && (
-                        <span className="week-day">
-                          {getWeekdayName(matchedDate?.date)}
-                        </span>
-                      )}
+                      <span className="week-day">
+                        {matchedDate?.date ? (
+                          <>{getWeekdayName(matchedDate?.date)}</>
+                        ) : (
+                          <></>
+                        )}
+                      </span>
+                      <br />
                       <Flatpickr
                         style={{
                           backgroundColor: "var(--color3)",

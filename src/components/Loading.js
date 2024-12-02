@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import './Loading.css';
 
@@ -15,3 +16,4 @@ const Loading = () => {
 };
 
 export default Loading;
+

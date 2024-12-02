@@ -26,6 +26,4 @@ export default AddClass;
 // }
 
 
-export async function generateStaticParams() {
-  return []; // Return an empty array to handle the route dynamically.
-}
+

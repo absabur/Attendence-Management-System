@@ -27,6 +27,4 @@ export default AddClass;
 // }
 // export const revalidate = 5;
 
-export async function generateStaticParams() {
-  return []; // Return an empty array to handle the route dynamically.
-}
+

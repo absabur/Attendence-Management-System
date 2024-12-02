@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import "./MechanicalClock.css"; // We'll create this CSS file next
 
