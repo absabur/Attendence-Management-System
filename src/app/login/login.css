@@ -81,3 +81,10 @@
     border-radius: 100%;
     box-shadow: 0 0 5px black;
 }
+
+
+.register{
+    text-decoration: none;
+    color: #03eeff;
+    margin-left: 10px;
+}

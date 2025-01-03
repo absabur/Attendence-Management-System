@@ -2,7 +2,7 @@
   "teachers": [
     {
       "id": "0e85",
-      "fullname": "Md Abdus Sabur",
+      "fullname": "Abdus Sabur",
       "email": "",
       "phone": "",
       "username": "absabur",
@@ -11,7 +11,7 @@
       "password": "1111",
       "cpassword": "1111",
       "createdAt": "2024-08-29T09:25:37.875Z",
-      "updatedAt": "2024-09-01T05:05:21.698Z"
+      "updatedAt": "2025-01-03T16:52:27.376Z"
     },
     {
       "id": "4199",
@@ -25,6 +25,19 @@
       "cpassword": "1111",
       "createdAt": "2024-09-01T05:47:24.923Z",
       "updatedAt": "2024-09-01T05:51:24.824Z"
+    },
+    {
+      "id": "2798",
+      "fullname": "test",
+      "email": "",
+      "phone": "",
+      "username": "absaburs",
+      "department": "civil-engineering",
+      "institute": "dhaka-polytechnic-institute",
+      "password": "2222",
+      "cpassword": "2222",
+      "createdAt": "2025-01-03T16:17:55.356Z",
+      "updatedAt": "2025-01-03T16:17:55.356Z"
     }
   ],
   "classes": [
@@ -34,11 +47,11 @@
       "semester": "3rd",
       "shift": "Second",
       "subject": "python",
-      "cell": 14,
+      "cell": 15,
       "institute": "bogura-polytechnic-institute",
       "group": "A",
       "createdAt": "2024-08-29T09:27:06.933Z",
-      "updatedAt": "2024-12-02T14:18:16.508Z",
+      "updatedAt": "2025-01-03T15:26:33.082Z",
       "teacher": "0e85"
     }
   ],
@@ -161,8 +174,8 @@
       "studentId": "c8bb",
       "classNumber": 2,
       "createdAt": "2024-08-30T16:35:18.598Z",
-      "updatedAt": "2024-08-30T16:35:18.598Z",
-      "time": "On Time"
+      "updatedAt": "2025-01-03T16:56:44.168Z",
+      "time": "Early Exit"
     },
     {
       "id": "8fca",
@@ -242,6 +255,36 @@
       "classNumber": 3,
       "createdAt": "2024-12-02T14:20:21.107Z",
       "updatedAt": "2024-12-02T14:20:21.107Z",
+      "time": "On Time"
+    },
+    {
+      "id": "fc84",
+      "status": "P",
+      "classId": "b8da",
+      "studentId": "fd13",
+      "classNumber": 3,
+      "createdAt": "2025-01-03T16:53:37.687Z",
+      "updatedAt": "2025-01-03T16:53:37.687Z",
+      "time": "On Time"
+    },
+    {
+      "id": "f92b",
+      "status": "A",
+      "classId": "b8da",
+      "studentId": "e6f6",
+      "classNumber": 3,
+      "createdAt": "2025-01-03T16:53:38.415Z",
+      "updatedAt": "2025-01-03T16:53:38.415Z",
+      "time": "On Time"
+    },
+    {
+      "id": "8e0a",
+      "status": "P",
+      "classId": "b8da",
+      "studentId": "1903",
+      "classNumber": 3,
+      "createdAt": "2025-01-03T16:53:39.287Z",
+      "updatedAt": "2025-01-03T16:53:39.287Z",
       "time": "On Time"
     }
   ]

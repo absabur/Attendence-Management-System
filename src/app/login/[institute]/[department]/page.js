@@ -20,7 +20,7 @@ const Teachers = async ({ params }) => {
         <h2>Choose your name</h2>
         {teachers.map((teacher) => (
           <Link
-            href={`/login/${params.institute}/${params.department}/${teacher.id}`}
+            href={`/login/${params.institute}/${params.department}/${teacher.username}`}
             key={teacher.id}
             className="link"
           >

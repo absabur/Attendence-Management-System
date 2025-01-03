@@ -6,12 +6,7 @@ import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({
-    fullname: "",
-    email: "",
-    phone: "",
     username: "",
-    department: "",
-    institute: "",
     password: "",
     cpassword: "",
   });

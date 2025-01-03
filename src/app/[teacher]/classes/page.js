@@ -21,14 +21,4 @@ const TeacherProfile = async ({params}) => {
 export default TeacherProfile;
 
 
-// export async function generateStaticParams() {
-//   const teachers = await fetch("http://localhost:4000/teachers", { cache: "no-store"});
-//   const teachersJson = await teachers.json();
-//   return teachersJson.map((teacher) => ({
-//     teacher: teacher.id,
-//   }));
-// }
-// export const revalidate = 5;
-
-
 

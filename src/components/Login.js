@@ -28,9 +28,9 @@ const Login = ({ params }) => {
     event.preventDefault();
 
     try {
-      const teacherId = params.teachers;
+      const teacherUsername = params.teachers;
       const response = await fetch(
-        `http://localhost:4000/teachers?id=${teacherId}`, { cache: "no-store"}
+        `http://localhost:4000/teachers?username=${teacherUsername}`, { cache: "no-store"}
       );
 
       const result = await response.json();

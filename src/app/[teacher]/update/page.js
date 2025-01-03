@@ -1,13 +1,12 @@
 import Link from "next/link";
+import "@/app/register/register.css";
+import UpgradeTeacher from "@/components/UpgradeTeacher";
 
-import "./register.css";
-import Profile from "@/components/Profile";
-
-const ProfileShow = ({params}) => {
+const TeacherForm = ({params}) => {
   return (
     <div className="register-page">
       <h1>Update Profile</h1>
-      <Profile params={params}/>
+      <UpgradeTeacher />
       <Link className="btn" href={`/${params.teacher}/classes`}>
         Return to classes
       </Link>
@@ -15,5 +14,5 @@ const ProfileShow = ({params}) => {
   );
 };
 
-export default ProfileShow;
+export default TeacherForm;
 

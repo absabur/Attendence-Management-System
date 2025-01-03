@@ -9,6 +9,7 @@ const GetClasses = ({ params }) => {
   const [teacherClasses, setTeacherClasses] = useState([]);
   const [loading, setLoading] = useState(true);
   let teacherId = params.teacher;
+  
   useEffect(() => {
     const get = async () => {
       try {
@@ -34,8 +35,8 @@ const GetClasses = ({ params }) => {
       ) : (
         <div id="teacherProfile" className="classes">
           <SearchClasses element={"td"} />
-          {Object.keys(teacherClasses).map((key) => {
-            const cls = teacherClasses[key];
+          {teacherClasses.map((teacherClass) => {
+            const cls = teacherClass;
             return (
               <div key={cls.id}>
                 <Link className="class-card" href={`/class/${cls.id}`}>

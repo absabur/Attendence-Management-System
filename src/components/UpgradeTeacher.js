@@ -92,24 +92,8 @@ const UpgradeTeacher = () => {
     setFormData(result);
     router.push(`/${formData.id}/classes`, { scroll: false });
   };
-
-  const handleLogout = () => {
-    let con = window.confirm("Are you sure you want to Logout?");
-    if (con) {
-      localStorage.clear();
-      localStorage.setItem(
-        "toast",
-        JSON.stringify({
-          type: "info",
-          message: `Loged out successfully`,
-        })
-      );
-      router.push("/", { scroll: false });
-    }
-  };
   return (
     <>
-      <button onClick={handleLogout}>Logout</button>
       <form className="register-form" onSubmit={handleSubmit}>
         <div>
           <label>Your Name:</label>

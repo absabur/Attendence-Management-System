@@ -27,7 +27,12 @@ const UnAuthCheck = () => {
                 result.institute == token.institute &&
                 result.department == token.department
               ) {
-                router.push(`/${token.id}/classes`, { scroll: false });
+                const response = await fetch(
+                  `http://localhost:4000/teachers/${token.id}`,
+                  { cache: 'no-store' }
+                );
+                const result = await response.json();
+                router.push(`/${result.id}/classes`, { scroll: false });
               } else {
                 localStorage.removeItem("attendencetoken");
               }

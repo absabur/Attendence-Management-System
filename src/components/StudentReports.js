@@ -72,13 +72,14 @@ const StudentReports = ({params}) => {
           flexWrap: "wrap",
           justifyContent: "space-around",
           margin: "20px 0",
+          gap: "20px",
         }}
       >
-        <p>Total Classes: {classDetails?.attendence?.total}</p>
-        <p>Present: {classDetails?.attendence?.present}</p>
-        <p>Absent: {classDetails?.attendence?.absent}</p>
-        <p>Late Entries: {classDetails?.attendence?.late}</p>
-        <p>Early Exits: {classDetails?.attendence?.early}</p>
+        <p style={{width: "max-content"}}>Total Classes: {classDetails?.attendence?.total}</p>
+        <p style={{width: "max-content"}}>Present: {classDetails?.attendence?.present}</p>
+        <p style={{width: "max-content"}}>Absent: {classDetails?.attendence?.absent}</p>
+        <p style={{width: "max-content"}}>Late Entries: {classDetails?.attendence?.late}</p>
+        <p style={{width: "max-content"}}>Early Exits: {classDetails?.attendence?.early}</p>
       </div>
       <div className="charts">
         <div className="percentage">

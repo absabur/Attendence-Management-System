@@ -7,7 +7,7 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children, params }) {
-  let res = await fetch(`http://localhost:4000/teachers/${params.teacher}`, { cache: "no-store"})
+  let res = await fetch(`http://localhost:4000/teachers?username=${params.teacher}`, { cache: "no-store"})
   if (res.status == 404) {
     notFound()
   }

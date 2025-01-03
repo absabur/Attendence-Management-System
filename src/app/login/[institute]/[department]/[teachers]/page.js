@@ -6,10 +6,11 @@ const PasswordPage = async ({ params }) => {
   let dept = allDepartments.find((dept) => dept.id === params.department);
   let inst = allInstitutes.find((inst) => inst.id === params.institute);
   let teacher = await fetch(
-    `http://localhost:4000/teachers/${params.teachers}`,
+    `http://localhost:4000/teachers?=username=${params.teachers}`,
     { cache: "no-store" }
   );
   teacher = await teacher.json();
+  teacher = teacher[0];
 
   return (
     <div className="password-page">

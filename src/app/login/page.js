@@ -8,7 +8,7 @@ import React, { useEffect, useState } from "react";
 
 const Login = () => {
   const [institutes, setInstitutes] = useState([]);
-  const [method, setMethod] = useState(1);
+  const [method, setMethod] = useState(2);
 
   useEffect(() => {
     setInstitutes(allInstitutes);
@@ -81,7 +81,7 @@ const Login = () => {
             </Link>
           ))}
           <p>
-            Don&apos;t have an account? <Link href="/register">Register</Link>
+            Don&apos;t have an account? <Link className="register" href="/register">Register</Link>
           </p>
         </div>
       ) : (

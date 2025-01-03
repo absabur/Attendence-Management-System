@@ -1,0 +1,46 @@
+.teacher-details-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin-top: 20px;
+  background-color: var(--color3);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.teacher-details-page h2 {
+  text-align: center;
+}
+
+.detail {
+  margin: 8px 0;
+  display: flex;
+}
+
+
+.detail div {
+  width: 110px;
+  color: #555;
+  font-weight: 700;
+}
+
+.logout{
+  background-color: var(--color2);
+}
+
+.update-btn{
+  background-color: var(--color1);
+}
+
+.update-btn a{
+  text-decoration: none;
+  color: white;
+}
+
+
+.profile-page-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}

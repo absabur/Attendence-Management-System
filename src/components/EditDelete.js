@@ -49,7 +49,12 @@ const EditDelete = ({params}) => {
           })
         );
         let id = JSON.parse(localStorage.getItem("attendencetoken")).id
-        router.push(`/${id}/classes`, { scroll: false });
+        const teacherRes = await fetch(
+          `http://localhost:4000/teachers/${id}`,
+          { cache: 'no-store' }
+        );
+        const result = await teacherRes.json();
+        router.push(`/${result.id}/classes`, { scroll: false });
         return;
       }
       return;
